@@ -87,4 +87,15 @@ router.get("/me", (req, res, next) => {
   }
 });
 
+// @desc Post request to logout
+// @route /logout
+router.get("/logout", (req, res) => {
+  let token = req.headers["auth-token"];
+  if (!token) {
+    res.send("No token");
+  } else {
+    delete req.headers["auth-token"];
+  }
+});
+
 module.exports = router;
