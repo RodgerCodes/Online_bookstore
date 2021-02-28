@@ -20,6 +20,7 @@ app.use(cors());
 connectDB();
 
 app.use("/", require("./routes/user"));
+app.use("/dashboard", require("./routes/dashboard"));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
