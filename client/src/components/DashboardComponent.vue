@@ -18,7 +18,19 @@
         <li><button @click="_logout" class="p-3">Logout</button></li>
       </ul>
     </nav>
-    <Content />
+    <Content v-on:Open="Open" />
+    <div
+      v-if="isOpen"
+      class="bg-gray-400 w-full h-full absolute top-0.5 bg-opacity-40"
+    >
+      <Upload class="mt-28" />
+      <button
+        class="rounded-xl top-4 right-10 absolute p-4 text-white bg-blue-500"
+        @click="close"
+      >
+        X
+      </button>
+    </div>
     <h1>HEllO</h1>
   </div>
 </template>
@@ -26,12 +38,14 @@
 <script>
 import axios from "axios";
 import Content from "./Content";
+import Upload from "./Upload";
 
 export default {
   name: "DashboardComponent",
   data() {
     return {
       user: {},
+      isOpen: false,
     };
   },
   async created() {
@@ -60,9 +74,16 @@ export default {
       });
       this.$router.push("/");
     },
+    Open() {
+      this.isOpen = true;
+    },
+    close() {
+      this.isOpen = false;
+    },
   },
   components: {
     Content,
+    Upload,
   },
 };
 </script>

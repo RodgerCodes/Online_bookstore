@@ -17,6 +17,9 @@ const upload_schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  description: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("upload", upload_schema);

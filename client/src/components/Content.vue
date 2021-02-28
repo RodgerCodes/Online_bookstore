@@ -3,11 +3,12 @@
     <div class="w-8/12 bg-white p-6 rounded-lg">
       <div class="flex justify-between">
         <h1 class="font-bold text-4xl mb-4">Dashboard</h1>
-        <a
+        <button
           class="bg-blue-500 text-white px-4 py-3 rounded font-bold font-medium"
-          href="/upload"
-          >New Book</a
+          @click="$emit('Open')"
         >
+          New Book
+        </button>
       </div>
 
       <p class="text-lg p-3">Welcome , {{ user.name }}</p>
