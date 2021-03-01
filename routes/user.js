@@ -38,10 +38,8 @@ router.post("/register", async (req, res) => {
     });
 
     const user = await new_user.save();
-    res.json({ success: true, msg: user });
+    res.status(201).json({ success: true, msg: user });
   } catch (err) {
-    {
-    }
     console.error(err);
   }
 });
@@ -56,7 +54,7 @@ router.post("/login", (req, res) => {
     }
     let passwordisValid = bcrypt.compareSync(req.body.password, user.password);
     if (!passwordisValid) {
-      return res.status(401).send({ success: false, msg: "Password incorect" });
+      return res.send({ success: false, msg: "Password incorect" });
     } else {
       let token = jwt.sign({ _id: user._id }, process.env.SECRET);
       res

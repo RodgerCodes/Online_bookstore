@@ -61,22 +61,32 @@ export default {
         });
       }
 
-      let response = await axios.post(`${url}/login`, {
-        email: this.email,
-        password: this.password,
-      });
-
-      this.$toasted.show("Logged In", {
-        duration: 3000,
-        type: "success",
-        position: "top-center",
-      });
-
-      localStorage.setItem("token", response.data.token);
-
-      this.$router.push("/dashboard");
-
-      // console.log(response);
+      axios
+        .post(`${url}/login`, {
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.success == false) {
+            this.$toasted.show(response.data.msg, {
+              duration: 3000,
+              type: "error",
+              position: "top-center",
+            });
+          } else {
+            localStorage.setItem("token", response.data.token);
+            this.$toasted.show("Logged In", {
+              duration: 3000,
+              type: "success",
+              position: "top-center",
+            });
+            this.$router.push("/dashboard");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

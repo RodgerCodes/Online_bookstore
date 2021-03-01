@@ -52,7 +52,7 @@ export default {
       this.user = users.data;
       this.content = response;
 
-      console.log(this.content);
+      // console.log(this.content);
     }
   },
 };
