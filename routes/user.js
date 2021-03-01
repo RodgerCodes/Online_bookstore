@@ -50,7 +50,7 @@ router.post("/login", (req, res) => {
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) return res.status(500).send("Error from the server");
     if (!user) {
-      return res.status(404).send({ success: false, msg: "User not found" });
+      return res.send({ success: false, msg: "User not found" });
     }
     let passwordisValid = bcrypt.compareSync(req.body.password, user.password);
     if (!passwordisValid) {
